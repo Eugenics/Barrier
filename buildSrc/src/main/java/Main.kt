@@ -5,5 +5,5 @@ object Main {
     const val applicationId = "com.eugenics.barrier"
     const val versionName = "1.0"
     const val jvmTarget = "11"
-    const val kotlinCompilerExtensionVersion = "1.1.1"
+    const val kotlinCompilerExtensionVersion = "1.3.2"
 }

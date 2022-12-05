@@ -1,4 +1,4 @@
-package com.eugenics.barrier.ui.theme
+package com.eugenics.barrier.ui.compose.theme
 
 import androidx.compose.ui.graphics.Color
 
