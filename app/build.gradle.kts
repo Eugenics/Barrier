@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -51,6 +52,7 @@ android {
 
 dependencies {
 
+    // Core
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.lifecycleRuntimeKtx)
     implementation(Compose.activityCompose)
@@ -63,4 +65,12 @@ dependencies {
     androidTestImplementation(Compose.composeUiTestJunit)
     debugImplementation(Compose.composeUiTooling)
     debugImplementation(Compose.composeUiTestManifest)
+
+    // Room
+    implementation(Room.roomRuntime)
+    kapt(Room.roomCompiler)
+    implementation(Room.roomKtx)
+
+    // Accompanist
+    implementation(Accompanist.accompanistPermission)
 }
