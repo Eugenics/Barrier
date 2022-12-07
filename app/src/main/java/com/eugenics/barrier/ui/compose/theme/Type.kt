@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.sp
 import com.eugenics.barrier.R
 
 val RobotoSerifFamily = FontFamily(
-    Font(R.font.robotoserif_regular),
-    Font(R.font.robotoserif_thin),
-    Font(R.font.robotoserif_medium),
-    Font(R.font.robotoserif_light),
-    Font(R.font.robotoserif_bold),
+    Font(R.font.robotoserif_regular,FontWeight.Normal),
+    Font(R.font.robotoserif_thin,FontWeight.Thin),
+    Font(R.font.robotoserif_medium,FontWeight.Medium),
+    Font(R.font.robotoserif_light,FontWeight.Light),
+    Font(R.font.robotoserif_bold,FontWeight.Bold),
 )
 
 

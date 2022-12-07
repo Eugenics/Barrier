@@ -1,11 +1,7 @@
 package com.eugenics.barrier.ui.compose.screens.main
 
 import android.content.Intent
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -18,9 +14,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.eugenics.barrier.domain.model.PhoneRecord
+import com.eugenics.barrier.ui.compose.screens.main.components.RecordRow
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionRequired
 import com.google.accompanist.permissions.rememberPermissionState
@@ -69,20 +65,17 @@ private fun MainContent(
                 items = phoneRecords.value,
                 key = { record -> record.id }
             ) { phoneRecord ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                        .clickable {
-                            val intent = Intent(
-                                Intent.ACTION_CALL,
-                                "tel:${phoneRecord.phoneNumber}".toUri()
-                            )
-                            context.startActivity(intent)
-                        }
-                ) {
-                    Text(text = "name:${phoneRecord.name} - phone:${phoneRecord.phoneNumber}")
-                }
+                RecordRow(
+                    titleText = phoneRecord.name,
+                    subTitleText = phoneRecord.phoneNumber,
+                    onClick = {
+                        val intent = Intent(
+                            Intent.ACTION_CALL,
+                            "tel:${phoneRecord.phoneNumber}".toUri()
+                        )
+                        context.startActivity(intent)
+                    }
+                )
             }
         }
     }
