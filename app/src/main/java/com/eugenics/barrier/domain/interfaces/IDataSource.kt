@@ -5,4 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IDataSource {
     suspend fun fetchRecords(): Flow<List<PhoneRecord>>
+    suspend fun addRecord(record: PhoneRecord)
+    suspend fun editRecord(record: PhoneRecord)
+    suspend fun deleterRecord(record: PhoneRecord)
 }

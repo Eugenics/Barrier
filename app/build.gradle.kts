@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -28,6 +29,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        create("benchmark") {
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
         }
     }
     compileOptions {
@@ -73,4 +79,5 @@ dependencies {
 
     // Accompanist
     implementation(Accompanist.accompanistPermission)
+    implementation(Accompanist.accompanistSystemUi)
 }

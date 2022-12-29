@@ -9,12 +9,14 @@ import com.eugenics.barrier.domain.model.PhoneRecord
 data class PhoneRecordEntity(
     @PrimaryKey val id: String,
     @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "rem") val rem: String,
     @ColumnInfo(name = "phone_number") val phoneNumber: String
 ) {
     fun mapToModel(): PhoneRecord =
         PhoneRecord(
             id = id,
             name = name,
+            rem = rem,
             phoneNumber = phoneNumber
         )
 }

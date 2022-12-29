@@ -10,10 +10,13 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -40,11 +43,7 @@ private val LightColors = lightColorScheme(
     surfaceVariant = md_theme_light_surfaceVariant,
     onSurfaceVariant = md_theme_light_onSurfaceVariant,
     inverseSurface = md_theme_light_inverseSurface,
-    inverseOnSurface = md_theme_light_inverseOnSurface,
-    inversePrimary = md_theme_light_inversePrimary,
-    surfaceTint = md_theme_light_surfaceTint,
-    outlineVariant = md_theme_light_outlineVariant,
-    scrim = md_theme_light_scrim,
+    inverseOnSurface = md_theme_light_inverseOnSurface
 )
 
 
@@ -73,11 +72,7 @@ private val DarkColors = darkColorScheme(
     surfaceVariant = md_theme_dark_surfaceVariant,
     onSurfaceVariant = md_theme_dark_onSurfaceVariant,
     inverseSurface = md_theme_dark_inverseSurface,
-    inverseOnSurface = md_theme_dark_inverseOnSurface,
-    inversePrimary = md_theme_dark_inversePrimary,
-    surfaceTint = md_theme_dark_surfaceTint,
-    outlineVariant = md_theme_dark_outlineVariant,
-    scrim = md_theme_dark_scrim,
+    inverseOnSurface = md_theme_dark_inverseOnSurface
 )
 
 @Composable
@@ -101,6 +96,21 @@ fun BarrierTheme(
             window.statusBarColor = colorScheme.primary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
+    }
+
+    val systemUiController = rememberSystemUiController()
+    val useDarkIcons: Boolean = !darkTheme
+    val blackScrim = Color(0f, 0f, 0f, 0.3f) // 30% opaque black
+
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = useDarkIcons,
+            isNavigationBarContrastEnforced = false,
+            transformColorForLightContent = { original ->
+                blackScrim.compositeOver(original)
+            }
+        )
     }
 
     MaterialTheme(

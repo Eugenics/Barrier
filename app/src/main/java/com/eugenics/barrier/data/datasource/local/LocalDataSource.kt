@@ -13,4 +13,16 @@ class LocalDataSource(private val database: AppDatabase) : IDataSource {
                 entity.mapToModel()
             }
         }
+
+    override suspend fun addRecord(record: PhoneRecord) {
+        database.dao.insertPhoneRecord(record = record.mapToEntity())
+    }
+
+    override suspend fun editRecord(record: PhoneRecord) {
+        database.dao.updatePhoneRecord(record = record.mapToEntity())
+    }
+
+    override suspend fun deleterRecord(record: PhoneRecord) {
+        database.dao.deletePhoneRecord(record = record.mapToEntity())
+    }
 }
